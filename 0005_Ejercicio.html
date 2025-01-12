@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,11 +13,19 @@
                 <label for="fecha">Fecha de nacimiento:</label>
                 <input type="date" id="fecha" name="fecha" required style="width: 250px; height: 25px;">
                 <input type="submit" id="submit" value="Enviar" style="width: 250px; height: 25px;">
-
             </fieldset>
 
         </form>
-        <script
+        <script>
+                document.getElementById('fecha').addEventListener('input', function() {
+                    const fecha = document.getElementById('fecha').value;
+                    const mostrarFecha = document.createElement('div');
+                    mostrarFecha.innerHTML = `
+                        <p>${fecha}</p>
+                    `;
+                    document.body.appendChild(mostrarFecha);
+                });
+        </script>
     </article>
     
 </body>
