@@ -1,6 +1,7 @@
 /*
  * Dame un ejemplo de cada tipo de objeto en JavaScript.
  * Object, Array, Function, Date, RegExp, Map, Set.
+ * *
  */
 
 //Objeto

@@ -1,5 +1,6 @@
 /*
  * Genera una serie de variables number
+ *
  * y muestra por consola si son pares o impares mediante un boolean.
  */
 

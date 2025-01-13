@@ -1,5 +1,6 @@
 /*
  * Introduce un tipo un Ejemplo para tipo de primitivo y saca por consola el resultado.
+*
  */
 
 //Number

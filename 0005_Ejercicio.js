@@ -1,5 +1,6 @@
 /*
  * Crear una variable edad y mostrar por consola la que será el año siguiente.
+ *
  */
 
 let edad = 42;

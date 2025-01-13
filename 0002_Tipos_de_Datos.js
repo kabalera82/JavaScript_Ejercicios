@@ -1,3 +1,4 @@
+/* Tipos de datos en JavaScript */
 //Number
 
 let numeroEntero = 50;

@@ -1,3 +1,4 @@
+/**/
 // Ejecutar con: node 0001_Hola_Mundo.js
 
 console.log("Hola Mundo!");

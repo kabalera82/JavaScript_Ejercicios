@@ -1,5 +1,6 @@
 /*
  * Introduce la edad de un usuario e indica si es mayor de edad mediante un boolean
+ *
  */ 
 
 let edad1 = 18;

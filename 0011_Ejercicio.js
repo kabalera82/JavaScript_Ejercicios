@@ -1,4 +1,5 @@
 /*
+ *
  * Diseña un programa que indique si podemos salir a la calle, tener en cuenta
  * si está lloviendo y si hemos terminado nuestras tareas.
  */
