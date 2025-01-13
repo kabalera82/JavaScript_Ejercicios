@@ -72,11 +72,20 @@
 				<h3>String</h3>
 				<p id="cadena">
 					<script type="text/javascript">
-						function solicitaCadena (){
-							let comparaCadena;
-							-
+						function solicitaCadena() {
+							let comparaCadena = prompt("Por favor introduzca una cadena:");
+							while (comparaCadena.trim() === "") {
+								alert("El dato introducido no es correcto.");
+								comparaCadena = prompt("Introduzca una cadena no vacía.");
+							}
+							alert("El dato introducido " + comparaCadena + " es correcto.");
+							console.log("El dato introducido " + comparaCadena + " es correcto!.");
+							let pCadena = document.getElementById("cadena");
+							pCadena.innerHTML = comparaCadena;
 						}
-				
+						solicitaCadena();
+					</script>
+				</p>
 			</li>
 		</ol>
 	</body>
