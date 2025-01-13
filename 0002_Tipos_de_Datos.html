@@ -72,37 +72,20 @@
 				<h3>String</h3>
 				<p id="cadena">
 					<script type="text/javascript">
-<<<<<<< HEAD
-						function solicitaCadena() {
-							let comparaCadena = prompt("Por favor introduzca una cadena:");
-							while (comparaCadena.trim() === "") {
-								alert("El dato introducido no es correcto.");
-								comparaCadena = prompt("Introduzca una cadena no vacía.");
-							}
-							alert("El dato introducido " + comparaCadena + " es correcto.");
-							console.log("El dato introducido " + comparaCadena + " es correcto!.");
-							let pCadena = document.getElementById("cadena");
-							pCadena.innerHTML = comparaCadena;
-						}
-						solicitaCadena();
-					</script>
-				</p>
-=======
-							function solicitaCadena() {
-								let comparaCadena = prompt("Por favor introduzca una cadena de texto:");
-								while (comparaCadena.trim() === "") {
-									alert("El dato introducido no es correcto.");
-									comparaCadena = prompt("Introduzca una cadena de texto.");
-								}
-								alert("El dato introducido " + comparaCadena + " es correcto.");
-								console.log("El dato introducido " + comparaCadena + " es correcto!.");
-								let pCadena = document.getElementById("cadena");
-								pCadena.innerHTML = "El dato introducido es: " + comparaCadena;
-							}
-							solicitaCadena();
-						</script>
-				
->>>>>>> 0c948c4b7279f8497465ed28f04fc52bfce3706b
+		function solicitaCadena() {
+			let comparaCadena = prompt("Por favor introduzca una cadena de texto:");
+			while (comparaCadena.trim() === "") {
+				alert("El dato introducido no es correcto.");
+				comparaCadena = prompt("Introduzca una cadena de texto.");
+			}
+			alert("El dato introducido " + comparaCadena + " es correcto.");
+			console.log("El dato introducido " + comparaCadena + " es correcto!.");
+			let pCadena = document.getElementById("cadena");
+			pCadena.innerHTML = "El dato introducido es: " + comparaCadena;
+		}
+		solicitaCadena();
+	</script>
+</p>
 			</li>
 		</ol>
 	</body>
