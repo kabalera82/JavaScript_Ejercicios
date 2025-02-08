@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio0013js</title>
+</head>
+<body>
+    <h1>Define tu superhéroe favorito:</h1>
+    <ol>
+        <li>Crea una variable llamada miSuperheroeFavorito</li>
+        <li>Crea una variable llamada numeroFavorito</li>
+        <li>Crea una variable llamada altura</li>
+        <li>Crea una variable llamada longitud</li>
+        <li>Realiza Cálculos</li>
+        <li>Imprime los resultados</li>
+    </ol>
+
+    <fieldset style="display: flex; flex-direction: column;">
+        <form action="formulario" method="post" id="formulario">
+            <legend>Definición de variables</legend>
+            <label for="miSuperheroeFavorito">Super Héroe</label>
+            <input type="text" id="miSuperheroeFavorito" name="nombre" required style="width: 250px; height: 25px;">
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </fieldset>
+
+    <div id="resultados"></div>
+
+    <script>
+        document.getElementById('formulario').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const miSuperheroeFavorito = document.getElementById('miSuperheroeFavorito').value;
+
+
+ 
+
+            const objeto = {
+                miSuperheroeFavorito: miSuperheroeFavorito,
+
+            };
+
+            const resultadosDiv = document.createElement('div');
+            resultadosDiv.innerHTML = `
+                <p>Superhéroe Favorito: ${objeto.miSuperheroeFavorito}</p>
+
+            `;
+
+            document.getElementById('resultados').appendChild(resultadosDiv);
+        });
+    </script>
+</body>
+</html>

@@ -1,92 +1,141 @@
 <!DOCTYPE HTML>
 <html lang="es">
-	<head>
-		<meta charset="utf-8">
-		<title>Tipos de Datos en Js</title>
+<head>
+    <meta charset="utf-8">
+    <title>Tipos de Datos en Js</title>
+</head>
+<body style="background: gray; border: 5px solid black;">
+    <h1 style="background: gainsboro; border: 5px solid black;">Tipos de Datos.</h1>
+    <p>Vamos a realizar un ejercicio sencillo que consiste en introducir un </p>
+    <ol style="background: grey;">
+        <li>
+            <h3>Number</h3>
+            <p id="num"></p>
+            <script type="text/javascript">
+                function compararUnDato() {
+                    let datoParaComparar = prompt("Por favor introduzca el tipo de dato solicitado: ");
+                    while (isNaN(datoParaComparar) || datoParaComparar.trim() === "") {
+                        alert("El dato introducido no es Correcto.");
+                        datoParaComparar = prompt("Introduzca un dato de tipo number.");
+                    }
+                    alert("El dato introducido " + datoParaComparar + " es correcto.");
+                    console.log("El dato introducido " + datoParaComparar + " es correcto!.");
+                    document.getElementById("num").innerHTML = datoParaComparar;
+                }
+                compararUnDato();
+            </script>
+        </li>
+        <li>
+            <h3>Número con decimales.</h3>
+            <p>Introduce un número con decimales y haz clic en el botón para validar:</p>
+            <input type="text" id="inputDecimal" placeholder="Introduce un número con decimales">
+            <button onclick="solicitarDecimal()">Validar</button>
+            <p id="numDecimal"></p>
+            <script type="text/javascript">
+                function solicitarDecimal() {
+                    let decimal = document.getElementById("inputDecimal").value;
+                    while (isNaN(decimal) || Number.isInteger(parseFloat(decimal)) || decimal.trim() === "") {
+                        alert("El dato introducido no es Correcto.");
+                        decimal = prompt("Introduzca un dato de tipo number CON DECIMALES.");
+                    }
+                    alert("El dato introducido " + decimal + " es correcto!");
+                    document.getElementById("numDecimal").innerHTML = "El dato introducido es: " + decimal;
+                }
+            </script>
+        </li>
+        <li>
+            <h3>String</h3>
+            <p id="cadena"></p>
+            <script type="text/javascript">
+                function solicitaCadena() {
+                    let comparaCadena = prompt("Por favor introduzca una cadena de texto:");
+                    while (comparaCadena.trim() === "") {
+                        alert("El dato introducido no es correcto.");
+                        comparaCadena = prompt("Introduzca una cadena de texto.");
+                    }
+                    alert("El dato introducido " + comparaCadena + " es correcto.");
+                    console.log("El dato introducido " + comparaCadena + " es correcto!.");
+                    document.getElementById("cadena").innerHTML = "El dato introducido es: " + comparaCadena;
+                }
+                solicitaCadena();
+            </script>
+        </li>
+    </ol>
+    <p id="output"></p>
+    <script type="text/javascript">
+        // Tipos de datos en JavaScript
+        let numeroEntero = 50;
+        let numeroDecimal = 50.5;
+        let cadenaDeTexto = "Hola Mundo!";
+        let verdadero = true;
+        let falso = false;
+        let indefinido;
+        let nulo = null;
+        let numeroGrande = 1234567890123456789012345678901234567890n;
+        let simbolo = Symbol("descripcion");
+        let simbolo1 = Symbol('5');
+        let simbolo2 = Symbol('5');
+        let objeto = {
+            [simbolo]: "valor asociado al simbolo",
+        };
+        let objetoVacio = {};
+        let objetoConPropiedades = {
+            nombre: "KabaDev",
+            edad: 42,
+        };
+        let arrayVacio = [];
+        let arrayConElementos = [1, 2, 3, 4, 5];
+        let fecha = new Date();
+        let expresionRegular = /ab+c/;
+        let expresionRegular2 = new RegExp('ab+c');
+        let texto1 = "abbbc";
+        let texto2 = "abc";
 
-	</head>
-	<body style ="background: gray; border: 5px solid black;">
-		<h1 style="background: gainsboro; border: 5px solid black;">Tipos de Datos.</h1>
-		<p>Vamos a realizar un ejercicio sencillo que consiste en introducir un </p>
-		<ol style="background: grey;">
-			<li>
-				<h3>Number</h3>
-				<p id="num">
-				    <script type="text/javascript">
-				        function compararUnDato() {
-				            let datoParaComparar = prompt("Por favor introduzca el tipo de dato solicitado: ");
-				            // Mientras el datoParaComparar no sea un número o datoParaComparar esté vacío.
-				            // El método .trim elimina los espacios en blanco de un string, lo utilizamos para saber si es un string vacío.
-				            while (isNaN(datoParaComparar) || datoParaComparar.trim() === "") {
-				                alert("El dato introducido no es Correcto.");
-				                datoParaComparar = prompt("Introduzca un dato de tipo number.");
-				            }
-				            alert("El dato introducido " + datoParaComparar + " es correcto.");
-				            console.log("El dato introducido " + datoParaComparar + " es correcto!.");
+        // Crear el contenido del párrafo
+        let contenido = `
+            <strong>Number</strong><br>
+            Entero: ${numeroEntero}<br>
+            Decimal: ${numeroDecimal}<br><br>
+            <strong>String</strong><br>
+            Cadena de texto: ${cadenaDeTexto}<br><br>
+            <strong>Boolean</strong><br>
+            Verdadero: ${verdadero}<br>
+            Falso: ${falso}<br><br>
+            <strong>Undefined</strong><br>
+            Indefinido: ${indefinido}<br><br>
+            <strong>Null</strong><br>
+            Nulo: ${nulo}<br><br>
+            <strong>BigInt</strong><br>
+            Número grande: ${numeroGrande}<br><br>
+            <strong>Symbol</strong><br>
+            Símbolo: ${simbolo.toString()}<br>
+            Símbolo1: ${simbolo1.toString()}<br>
+            Símbolo2: ${simbolo2.toString()}<br>
+            Objeto con símbolo: ${objeto[simbolo]}<br>
+            Símbolo1 === Símbolo2: ${simbolo1 === simbolo2}<br><br>
+            <strong>Object</strong><br>
+            Objeto vacío: ${JSON.stringify(objetoVacio)}<br>
+            Objeto con propiedades: ${JSON.stringify(objetoConPropiedades)}<br>
+            Nombre: ${objetoConPropiedades.nombre}, Edad: ${objetoConPropiedades.edad}<br><br>
+            <strong>Array</strong><br>
+            Array vacío: ${JSON.stringify(arrayVacio)}<br>
+            Array con elementos: ${arrayConElementos}<br><br>
+            <strong>Date</strong><br>
+            Fecha: ${fecha}<br><br>
+            <strong>RegExp</strong><br>
+            Expresión regular: ${expresionRegular}<br>
+            Expresión regular 2: ${expresionRegular2}<br>
+            Expresión regular === Expresión regular 2: ${expresionRegular === expresionRegular2}<br>
+            Tipo de expresión regular: ${typeof expresionRegular}<br>
+            Tipo de texto2: ${typeof texto2}<br>
+            Expresión regular prueba con texto1: ${expresionRegular.test(texto1)}<br>
+            Expresión regular prueba con texto2: ${expresionRegular.test(texto2)}<br>
+            Expresión regular 2 prueba con texto1: ${expresionRegular2.test(texto1)}<br>
+            Expresión regular 2 prueba con texto2: ${expresionRegular2.test(texto2)}<br>
+        `;
 
-				            // Insertar el resultado en el elemento <li> con id "numero"
-				            let liNumero = document.getElementById("num");
-				            liNumero.innerHTML = datoParaComparar;
-				        }
-
-				        // Llamar a la función para solicitar un dato
-				        compararUnDato();
-				    </script>
-				</p>
-			</li>
-			<li>
-				<h3>Número con decimales.</h3>			 
-			    <p>Introduce un número con decimales y haz clic en el botón para validar:</p>
-			    <input type="text" id="inputDecimal" placeholder="Introduce un número con decimales">
-			    <button onclick="solicitarDecimar()">Validar</button>
-			    <p id="numDecimal"></p>
-			    <script type="text/javascript">
-			        function solicitarDecimar() {
-			            let decimal = document.getElementById("inputDecimal").value;
-			            let datoParaComparar;
-
-			            /*
-			             * Bucle para validar el dato introducido
-			             * isNaN comprueba si no es un número
-			             * Number.isInteger(parseFloat(decimal)) comprueba si es un entero
-			             * decimal.trim() elimina los espacios que pueda haber en una cadena y comprueba si está vacío.
-			             */
-			            while (isNaN(decimal) || Number.isInteger(parseFloat(decimal)) || decimal.trim() === "") {
-			                alert("El dato introducido no es Correcto.");
-			                decimal = prompt("Introduzca un dato de tipo number CON DECIMALES.");
-			            }
-
-			            // Si el dato es correcto, asignarlo a datoParaComparar
-			            datoParaComparar = decimal;
-
-			            // Mostrar un mensaje de éxito
-			            alert("El dato introducido " + decimal + " es correcto!");
-
-			            // Insertar el resultado en el elemento <p> con id "numDecimal"
-			            let pNumero = document.getElementById("numDecimal");
-			            pNumero.innerHTML = "El dato introducido es: " + datoParaComparar;
-			        }
-			    </script>
-			</li>
-			<li>
-				<h3>String</h3>
-				<p id="cadena">
-					<script type="text/javascript">
-		function solicitaCadena() {
-			let comparaCadena = prompt("Por favor introduzca una cadena de texto:");
-			while (comparaCadena.trim() === "") {
-				alert("El dato introducido no es correcto.");
-				comparaCadena = prompt("Introduzca una cadena de texto.");
-			}
-			alert("El dato introducido " + comparaCadena + " es correcto.");
-			console.log("El dato introducido " + comparaCadena + " es correcto!.");
-			let pCadena = document.getElementById("cadena");
-			pCadena.innerHTML = "El dato introducido es: " + comparaCadena;
-		}
-		solicitaCadena();
-	</script>
-</p>
-			</li>
-		</ol>
-	</body>
+        // Insertar el contenido en el párrafo
+        document.getElementById("output").innerHTML = contenido;
+    </script>
+</body>
 </html>

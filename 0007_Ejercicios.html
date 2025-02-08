@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Canvas para Figuras Geométricas</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas {
+            border: 5px solid black; /* Borde del canvas */
+        }
+    </style>
+</head>
+<body>
+    <h1>Dibujar Figuras Geométricas en Canvas</h1>
+    <h2>Rectángulo</h2>
+    <fieldset style="display: flex; flex-direction: column;">
+        <form id="formularioRectangulo">
+            <legend>Introduce las dimensiones del rectángulo</legend>
+            <label for="anchoRect">Ancho:</label>
+            <input type="number" id="anchoRect" name="anchoRect" placeholder="Introduce el ancho" required style="width: 250px; height: 25px;">
+            <label for="altoRect">Alto:</label>
+            <input type="number" id="altoRect" name="altoRect" placeholder="Introduce el alto" required style="width: 250px; height: 25px;">
+            <button type="submit">Dibujar</button>
+        </form>
+    </fieldset>
+    <h2>Triángulo</h2>
+    <fieldset style="display: flex; flex-direction: column;">
+        <form id="formularioTriangulo">
+            <legend>Introduce las dimensiones del triángulo</legend>
+            <label for="anchoTri">Ancho:</label>
+            <input type="number" id="anchoTri" name="anchoTri" placeholder="Introduce el ancho" required style="width: 250px; height: 25px;">
+            <label for="altoTri">Alto:</label>
+            <input type="number" id="altoTri" name="altoTri" placeholder="Introduce el alto" required style="width: 250px; height: 25px;">
+            <button type="submit">Dibujar</button>
+        </form>
+    </fieldset>
+    <button id="limpiarCanvas">Limpiar Canvas</button>
+    <canvas id="miCanvas" width="700" height="700"></canvas> <!-- Lienzo con id "miCanvas" y dimensiones 700x700 píxeles -->
+    <script>
+        document.getElementById('formularioRectangulo').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            const ancho = document.getElementById('anchoRect').value;
+            const alto = document.getElementById('altoRect').value;
+
+            // Obtener el contexto del canvas
+            const canvas = document.getElementById('miCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Dibujar el rectángulo con las dimensiones introducidas
+            ctx.fillStyle = 'blue'; // Color de relleno del rectángulo
+            ctx.fillRect(50, 50, ancho, alto); // Dibujar un rectángulo en (50, 50) con el ancho y alto introducidos
+        });
+
+        document.getElementById('formularioTriangulo').addEventListener('submit', function(event) {
+            event.preventDefault(); // Evitar el envío del formulario
+            const ancho = document.getElementById('anchoTri').value;
+            const alto = document.getElementById('altoTri').value;
+
+            // Obtener el contexto del canvas
+            const canvas = document.getElementById('miCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Dibujar el triángulo con las dimensiones introducidas
+            ctx.beginPath(); // Iniciar el trazado del triángulo
+            ctx.moveTo(200, 200); // Punto inicial del triángulo
+            ctx.lineTo(200 + parseInt(ancho), 200); // Línea horizontal derecha
+            ctx.lineTo(200, 200 + parseInt(alto)); // Línea vertical inferior
+            ctx.closePath(); // Cerrar el triángulo (línea izquierda) para completar la figura geométrica
+            ctx.fillStyle = 'green'; // Color de relleno del triángulo (green)
+            ctx.fill(); // Rellenar el triángulo con el color verde seleccionado (green)
+            ctx.stroke(); // Dibujar el borde del triángulo
+        });
+
+        document.getElementById('limpiarCanvas').addEventListener('click', function() {
+            // Obtener el contexto del canvas
+            const canvas = document.getElementById('miCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Limpiar el canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    </script>
+</body>
+</html>

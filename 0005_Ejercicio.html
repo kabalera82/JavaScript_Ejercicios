@@ -1,32 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- Metadatos básicos -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Validador de Edad</title>
 </head>
 <body>
+    <!-- Contenedor principal -->
     <article>
-        <form>
-            <fieldset style="border: solid 5px blue; display: flex; flex-direction: column;">
-                <legend>Introduzca su fecha de nacimiento</legend>
-                <label for="fecha">Fecha de nacimiento:</label>
-                <input type="date" id="fecha" name="fecha" required style="width: 250px; height: 25px;">
-                <input type="submit" id="submit" value="Enviar" style="width: 250px; height: 25px;">
+        <!-- Formulario para entrada de fecha -->
+        <form id="formularioEdad">
+            <fieldset style="display: flex; flex-direction: column;">
+                <!-- Título del formulario -->
+                <legend>Información Personal</legend>
+                
+                <!-- Campo de entrada de fecha -->
+                <!-- El tipo 'date' proporciona un selector de fecha nativo -->
+                <!-- required asegura que el campo no esté vacío -->
+                <input type="date" 
+                       id="fecha" 
+                       name="fecha" 
+                       required 
+                       style="width: 250px; height: 25px;">
+                
+                <!-- Botón de envío -->
+                <input type="submit" 
+                       id="submit" 
+                       value="Enviar" 
+                       style="width: 250px; height: 25px;">
             </fieldset>
-
         </form>
+
+        <!-- Script para la lógica de validación de edad -->
         <script>
-                document.getElementById('fecha').addEventListener('input', function() {
-                    const fecha = document.getElementById('fecha').value;
-                    const mostrarFecha = document.createElement('div');
-                    mostrarFecha.innerHTML = `
-                        <p>${fecha}</p>
+            // Añadir un event listener al campo de fecha
+            document.getElementById('fecha').addEventListener('input', function() {
+                // Obtener la fecha seleccionada y convertirla a objeto Date
+                const fecha = new Date(document.getElementById('fecha').value);
+                
+                // Calcular la edad actual
+                // Restamos el año de nacimiento del año actual
+                const edadActual = new Date().getFullYear() - fecha.getFullYear();
+                
+                // Función para mostrar el resultado en el DOM
+                function mostrarResultado(edadActual) {
+                    // Crear un nuevo elemento div para mostrar los resultados
+                    const mostrarResultado = document.createElement('div');
+                    
+                    // Variable para almacenar el mensaje según la edad
+                    let mensajeEdad;
+                    
+                    // Validación de la edad
+                    // Si es menor de 18, mostrar mensaje de menor de edad
+                    // Si es 18 o mayor, mostrar mensaje de mayor de edad
+                    if (edadActual < 18) {
+                        mensajeEdad = '<p>Usted es menor de edad.</p>';
+                    } else {
+                        mensajeEdad = '<p>Usted es mayor de edad.</p>';
+                    }
+                    
+                    // Construir el contenido HTML con los resultados
+                    // Utilizamos template literals para una mejor legibilidad
+                    mostrarResultado.innerHTML = `                            
+                        <p>Fecha de nacimiento: ${fecha.toLocaleDateString()}</p>
+                        <p>Edad actual: ${edadActual}</p>
+                        ${mensajeEdad}
                     `;
-                    document.body.appendChild(mostrarFecha);
-                });
+                    
+                    // Añadir el resultado al final del body
+                    document.body.appendChild(mostrarResultado);
+                } 
+                
+                // Llamar a la función para mostrar el resultado
+                mostrarResultado(edadActual);
+            });
         </script>
     </article>
-    
 </body>
 </html>

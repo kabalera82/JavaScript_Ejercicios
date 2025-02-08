@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tipos de Datos</title>
+</head>
+<body>
+    <h1>Ejemplos de Datos</h1>
+    <fieldset style="display: flex; flex-direction: column;">
+        <form id="formulario">
+            <legend>What's your name?</legend>
+            <label for="yourName">Insert your name</label>
+            <input type="text" id="yourName" name="name" required style="width: 250px; height: 25px;">
+            <label for="age">Insert your age</label>
+            <input type="number" id="age" name="age" required style="width: 250px; height: 25px;">
+            <button type="submit">Enviar</button>
+        </form>
+    </fieldset>
+    <div id="resultados"></div>
+</body>
+<script>
+    document.getElementById('formulario').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const yourName = document.getElementById('yourName').value;
+        const yourAge = document.getElementById('age').value;
+        let nameCorrect = false;
+        let ageCorrect = false;
+
+        if (yourName !== "Laia") {
+            alert("No te Conozco prueba otra vez.");
+        } else {
+            alert("Nombre correcto");
+            nameCorrect = true;
+        }
+
+        const currentYear = new Date().getFullYear();
+        const birthYear = currentYear - yourAge;
+
+        if (birthYear !== 2018) {
+            alert("Edad incorrecta, prueba otra vez.");
+        } else {
+            alert("Edad correcta");
+            ageCorrect = true;
+        }
+
+        if (nameCorrect && ageCorrect) {
+            const resultadosDiv = document.createElement('div');
+            resultadosDiv.innerHTML = `
+                <p>Nombre: ${yourName}✌️</p>
+                <p>Edad: ${yourAge}✌️</p>
+            `;
+            document.getElementById('resultados').appendChild(resultadosDiv);
+        }
+    });
+</script>
+</html>
