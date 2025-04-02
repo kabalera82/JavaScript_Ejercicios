@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Ejercicios.css">
+    <script type="text/javascript" src="Ejercicios.js" defer></script>
+    <script type="text/javascript" src="Funcionalidades.js" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Katas JS</h1>
+    <button onclick="cambiaColor()">🤯</button>
+
+    <fieldset>
+        <h2>Ejercicio SetCapitalUpper</h2>
+        <p>Haz una función llamada "setCapitalUpper" que reciba un string y que DEVUELVA el string con la inicial en mayúscula.</p>
+        <p></p>
+        <pre>
+            <code>
+
+                // Ejemplos de uso:
+                // setCapitalUpper("hello"); // "Hello"
+                // setCapitalUpper("hELLO"); // "Hello"
+                // setCapitalUpper("HeLlO"); // "Hello"
+                // setCapitalUpper("Hello"); // "Hello"
+                
+                // Creamos una función que reciba un string
+                function setCapitalUpper(str){
+                    //Declaramos una variable que sea igual al primer caracter y lo convertimos en mayuscula
+                    let firstUp = str.charAt(0).toUpperCase();
+                    //Por ultimo metodo slice para obtener el resto desde la posicion 1 hasta el final
+                    let Upper = str.slice(1).toLowerCase();
+                    //Devolvemos la dos constantes juntas.
+                    return firstUp+Upper;
+                }
+                //Comprobamos resultado
+                console.log(setCapitalUpper("hello"));
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>FizzBuzz</h2>
+        <p>Haz una función "fizzbuzz" que reciba un número entero y, para cada número desde 1 hasta el número recibido MUESTRE POR PANTALLA lo siguiente:</p>
+        <p>"fizz" si ese número es múltiplo de 3</p>
+        <p>"buzz" si ese número es múltiplo de 5</p>
+        <p>"fizzbuzz" si ese número es múltiplo de 3 y de 5 a la vez</p>
+        <p>el mismo número si éste no es múltiplo ni de 3 ni de 5</p>
+        <pre>
+            <code>
+
+                //Ejemplo de uso:
+                //fizzbuzz(5); // 1 2 "fizz" 4 "buzz"
+
+                //Declaramos
+                function FizzBuzz(num) {
+                    // Iniciamos un bucle que recorre desde 0 hasta el número recibido (excluyendo el número)
+                    for (let i = 0; i < num; i++) {
+                        // Si el número actual es múltiplo de 3 y de 5 (es decir, divisible entre ambos)
+                        if (i % 3 === 0 && i % 5 === 0) {
+                            console.log("FizzBuzz"); // Mostramos "FizzBuzz" en la consola
+                        } 
+                        // Si el número actual es múltiplo de 5 (pero no de 3, porque el caso anterior ya lo cubre)
+                        else if (i % 5 === 0) {
+                            console.log("Buzz"); // Mostramos "Buzz" en la consola
+                        } 
+                        // Si el número actual es múltiplo de 3 (pero no de 5, porque el caso anterior ya lo cubre)
+                        else if (i % 3 === 0) {
+                            console.log("Fizz"); // Mostramos "Fizz" en la consola
+                        } 
+                        // Si el número no es múltiplo de 3 ni de 5
+                        else {
+                            console.log(i); // Mostramos el número actual en la consola
+                        }
+                    }
+                }
+                
+                // Llamamos a la función FizzBuzz con el número 10
+                FizzBuzz(10); 
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Body Mass Index</h2>
+        <p>Escribe una función "bmc" que reciba dos números enteros, "height" y "weight", </p>
+        <p>calcule el índice de masa corporal y te devuelva alguna de los siguientes strings</p>
+        <p>según el caso:</p>
+        <p>Si el índice es menor o igual que 18.5, devuelve "underweight"</p>
+        <p>Si es menor o igual que 25, devuelve "normal"</p>
+        <p>Si es menor o igual que 30, "overweight"</p>
+        <p>Si es mayor de 30, "obese"</p>
+        <pre>
+            <code>
+                //Creamos la funcion
+                function bmc(height, weight){
+                    //creamos la variable con la logica de la formula de IMC
+                    let imc = weight/Math.pow(height/100,2)
+                    //Recorremos if else anidados para comprobar
+                    if(imc <=18.5){
+                        consolelog("your IMC is underweight")
+                    }else if ( imc <=25){
+                        console.log("your IMC is normal")
+                    }else if(imc <= 30){
+                        console.log("eat more vegetables")
+                    }else (console.log("maybe you should go to the gym"))
+                }
+                //Comprobamos la funcion que esté correcta
+                bmc(180,90)
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Encontrar el número Máximo</h2>
+        <p>Crea una función "max" que reciba 4 números enteros y devuelva el valor</p>
+        <p>del mayor de ellos. NO SE PUEDE USAR Math.max</p>                 
+        <p>Ejemplo de uso</p>
+        <p>max(10, 15, 100, 40,); // 100</p>           
+        <pre>
+            <code>                                   
+                function max(numbers) {
+                    // Inicializar con el primer elemento del array
+                    let numMax = numbers[0]; 
+                    // i = 1 para comparar desde el segundo elemento
+                    for (let i = 1; i < numbers.length; i++) { 
+                        //Comparamos numMax con el valor de la posicion de numbers
+                        if (numbers[i] > numMax) { 
+                            // Actualizar el máximo si es necesario
+                            numMax = numbers[i]; 
+                        }
+                    }
+                    // Devolvemos el número máximo
+                    return numMax;
+                }
+                //Array de numeros 
+                numbers = [10, 15, 100, 40];
+                console.log(max(numbers));
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Anagrama</h2>
+        <p>Escribe una función que reciba dos palabras (String) y retorne verdadero o falso (Bool) según sean o no anagramas.</p>
+        <p>Un Anagrama consiste en formar una palabra reordenando TODAS las letras de otra palabra inicial.</p>
+        <p>NO hace falta comprobar que ambas palabras existan.</p>
+        <p>Dos palabras exactamente iguales no son anagrama.</p>
+        <pre>
+            <code>
+                //Ejemplos de uso "Clint Eastwood" &#8596; "Old West Action"
+                /*Crea una funcion anagrama que compruebe si las frases introducidas son anagramas o no*/
+                //Prueba de uso Clint Eastwood  Old West Action
+                function anagrama(str1, str2) {
+                    //toLowerCase convertimos la cadena a minusculas
+                    //split Dividimos la cadena en un arreglo de palabras, eliminando espacios
+                    //Unimos todo en una sola cadena sin espacios
+                    //Convertimos en una cadena de caracteres lo que permite usar el sort
+                    //Ordenamos alfabeticamente
+                    //Unimos en una nueva cade
+                    let anagram1 = str1.toLowerCase().split(" ").join("").split("").sort().join("");
+                    let anagram2 = str2.toLowerCase().split(" ").join("").split("").sort().join("");
+                    
+                    // Observamos los resultados procesados
+                    console.log(anagram1);
+                    console.log(anagram2);
+                    
+                    // Comparamos las cadenas procesadas y mostramos el resultado
+                    console.log(anagram1 === anagram2 ? 
+                        `${str1} y ${str2} son anagramas.` : 
+                        `${str1} y ${str2} no son anagramas.`);
+                }
+
+                // Prueba de uso
+                anagrama("Clint Eastwood", "Old West Action");
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Decimal a Binario</h2>
+        <p>pendiente de revisión de la lógica de los negativos.</p>
+        <p></p>
+        <pre>
+            <code>
+                function binario(num) {
+                    console.log("Ejecutando función binario con num =", num);
+                    let binario = "";
+                
+                    if (num > 0) {
+                        while (num != 0) {
+                            let residuo = num % 2;
+                            console.log("Residuo:", residuo, "Num antes:", num);
+                            binario = residuo + binario;
+                            num = Math.floor(num / 2);
+                            console.log("Num después:", num, "Binario:", binario);
+                        }
+                        return binario || "0";
+                    } else if (num < 0) {
+                        let bits = 8;
+                        let positivo = Math.abs(num);
+                        while (positivo != 0) {
+                            let residuo = positivo % 2;
+                            console.log("Residuo:", residuo, "Positivo antes:", positivo);
+                            binario = residuo + binario;
+                            positivo = Math.floor(positivo / 2);
+                            console.log("Positivo después:", positivo, "Binario:", binario);
+                        }
+                        binario = binario.padStart(bits, "0");
+                        console.log("Binario antes de complemento a uno:", binario);
+                
+                        let complementoUno = binario
+                            .split("")
+                            .map(bit => (bit === "0" ? "1" : "0"))
+                            .join("");
+                        console.log("Complemento a uno:", complementoUno);
+                
+                        let complementoDos = (parseInt(complementoUno, 2) + 1)
+                            .toString(2)
+                            .padStart(bits, "0");
+                        console.log("Complemento a dos:", complementoDos);
+                
+                        return complementoDos;
+                    } else {
+                        return "0";
+                    }
+                }
+                
+                // Ejemplo de uso
+                console.log(binario(10));  // "1010"
+                console.log(binario(-10)); // "11110110"
+                console.log(binario(0));   // "0"
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Sucesion de Fibonacci</h2>
+        <p>Escribe un programa que imprima los 50 primeros números de la sucesión de Fibonacci empezando en 0.</p>
+        <p>La serie Fibonacci se compone por una sucesión de números en la que el siguiente siempre es la suma de los dos anteriores.</p>
+        <p>0, 1, 1, 2, 3, 5, 8, 13...</p>
+        <pre>
+            <code>
+                function Fibonacci(num) {
+                    let n0 = 0;
+                    let n1 = 1;
+                    let fib;
+                
+                    for (let i = 0; i < num; i++) {
+                        console.log(n0);
+                        fib = n0 + n1;
+                        n0 = n1;
+                        n1 = fib;
+                    }
+                }
+                // Ejemplo de uso
+                Fibonacci(50);
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Pasar un entero a Hexadecimal</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+    <fieldset>
+        <h2>Ejercicio</h2>
+        <p></p>
+        <p></p>
+        <pre>
+            <code>
+                
+            </code>
+        </pre>
+    </fieldset>
+</body>
+</html>

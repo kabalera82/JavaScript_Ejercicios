@@ -1,0 +1,39 @@
+:root {
+    --background-color: #000000; /* Fondo negro */
+    --text-color: #00FF00; /* Texto verde brillante */
+    --title-color: #FFFF00; /* Títulos en amarillo brillante */
+    --link-color: #00BFFF; /* Enlaces en azul brillante */
+    --link-hover-color: #FFBF00; /* Enlaces en ámbar al pasar el ratón */
+    --border-color: #00FF00; /* Borde verde brillante */
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: var(--title-color);
+   
+}
+
+pre {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    padding: 10px;
+    border: 1px solid var(--border-color);
+}
+
+code {
+    color: var(--text-color);
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--link-hover-color);
+}
