@@ -11,17 +11,18 @@
  */
 
 // Tu respuesta aquí
-    //Creamos una función que reciba un string
-    function setCapitalUpper(str){
-        //Declaramos una variable que sea igual al primer caracter y lo convertimos en mayuscula
-        let firstUp = str.charAt(0).toUpperCase();
-        //Por ultimo metodo slice para obtener el resto desde la posicion 1 hasta el final
-        let Upper = str.slice(1).toLowerCase();
-        //Devolvemos la dos constantes juntas.
-        return (firstUp+Upper)
-    }
-    //Comprobamos resultado
-    console.log(setCapitalUpper("hello"));
+//Creamos una función que reciba un string
+function setCapitalUpper(str) {
+    //Declaramos una variable que sea igual al primer caracter y lo convertimos en mayuscula 
+    //const porque no vamos a cambiar el valor de la variable
+    const firstUp = str.charAt(0).toUpperCase();
+    //Por ultimo metodo slice para obtener el resto desde la posicion 1 hasta el final
+    const Upper = str.slice(1).toLowerCase();
+    //Devolvemos la dos constantes juntas.
+    return (firstUp + Upper)
+}
+//Comprobamos resultado
+console.log(setCapitalUpper("hello"));
 
 
 /**
@@ -38,13 +39,13 @@
 
 // Tu respuesta aquí
 //Declar
-function FizzBuzz(num){
-    for (let i = 0; i < num ; i++){
-        if ((i%3==0 && i%5==0)){
+function FizzBuzz(num) {
+    for (let i = 0; i < num; i++) {
+        if ((i % 3 == 0 && i % 5 == 0)) {
             console.log("Fizz")
-        }else if(i%5===0){
+        } else if (i % 5 === 0) {
             console.log("Buzz")
-        }else if (i%3==0) {
+        } else if (i % 3 == 0) {
             console.log("Fizz");
         } else {
             console.log(i)
@@ -74,20 +75,17 @@ FizzBuzz(10);
 
 // Tu respuesta aquí
 //Creamos la funcion
-function bmc(height, weight){
+function bmc(height, weight) {
     //creamos la variable con la logica de la formula de IMC
-    let imc = weight/Math.pow(height/100,2)
+    const imc = weight / Math.pow(height / 100, 2)
     //Recorremos if else anidados para comprobar
-    if(imc <=18.5){
-        consolelog("your IMC is underweight")
-    }else if ( imc <=25){
-        console.log("your IMC is normal")
-    }else if(imc <= 30){
-        console.log("eat more vegetables")
-    }else (console.log("maybe you should go to the gym"))
+    if (imc <= 18.5) return "your IMC is underweight";
+    if (imc <= 25) return "your IMC is normal";
+    if (imc <= 30) return "eat more vegetables";
+    return "maybe you should go to the gym"
 }
 //Comprobamos la funcion que esté correcta
-bmc(180,90)
+bmc(180, 90)
 
 
 
@@ -101,17 +99,28 @@ bmc(180,90)
  */
 function max(numbers) {
     // Inicializar con el primer elemento del array
-    let numMax = numbers[0]; 
+    let numMax = numbers[0];
     // i = 1 para comparar desde el segundo elemento
-    for (let i = 1; i < numbers.length; i++) { 
+    for (let i = 1; i < numbers.length; i++) {
         //Comparamos numMax con el valor de la posicion de numbers
-        if (numbers[i] > numMax) { 
+        if (numbers[i] > numMax) {
             // Actualizar el máximo si es necesario
-            numMax = numbers[i]; 
+            numMax = numbers[i];
         }
     }
     // Devolvemos el número máximo
     return numMax;
+}
+
+function max(n1, n2, n3, n4) {
+    const numbers = [n1, n2, n3, n4];
+    let greaterNumber = numbers[0];
+    for (const number of numbers) {
+        if (number > greaterNumber) {
+            greaterNumebr = number;
+        }
+    }
+    return greaterNumber;
 }
 //Array de numeros 
 numbers = [10, 15, 100, 40];
@@ -128,14 +137,14 @@ function anagrama(str1, str2) {
     //Unimos en una nueva cade
     let anagram1 = str1.toLowerCase().split(" ").join("").split("").sort().join("");
     let anagram2 = str2.toLowerCase().split(" ").join("").split("").sort().join("");
-    
+
     // Observamos los resultados procesados
     console.log(anagram1);
     console.log(anagram2);
-    
+
     // Comparamos las cadenas procesadas y mostramos el resultado
-    console.log(anagram1 === anagram2 ? 
-        `${str1} y ${str2} son anagramas.` : 
+    console.log(anagram1 === anagram2 ?
+        `${str1} y ${str2} son anagramas.` :
         `${str1} y ${str2} no son anagramas.`);
 }
 
@@ -235,4 +244,36 @@ function Fibonacci(num) {
 // Ejemplo de uso
 Fibonacci(20); // Imprime los primeros 50 números de la sucesión de Fibonacci
 
-/**/
+/*
+ * Escribe un programa que se encargue de comprobar si un número es o no primo.
+ * Hecho esto, imprime los números primos entre 1 y 100.
+ */
+
+function esPrimo(num) {
+    for (let i = 1; i <= num; i++) { }
+    num % i === 0 ? console.log(num + "no es un numero primo") : console.log(num + "es un numero primo")
+
+}
+
+//Ejemplo de uso
+console.log(esPrimo(7));
+
+// objetos 
+// arrays
+
+// ARRAYS
+// new Array()
+//[]
+
+// OBJECTS
+// new Object()
+//{}
+/* los . normalmente indican propiedad*/
+
+const obj = {a: 1};
+console.log(obj.a); // 1
+console.log(obj.b); // undefined
+obj.a=30;
+console.log(obj.a); // 30
+//De manera dinámica se pueden añadir propiedades a un objeto
+
