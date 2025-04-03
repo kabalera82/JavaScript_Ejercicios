@@ -3,13 +3,10 @@
     margin:o;
     box-sizing:border-box;
 }
-body{
-    background-color: black;
-}
+
 
 canvas {
-    background-color: #f0f0f0;
+    background-color: #df0808;
     display: block;
     margin: 0 auto;
-
 }
