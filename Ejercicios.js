@@ -235,4 +235,76 @@ function Fibonacci(num) {
 // Ejemplo de uso
 Fibonacci(20); // Imprime los primeros 50 números de la sucesión de Fibonacci
 
-/**/
+/*Codigo Morse*/
+
+//Creamos un arrays con los caracteres
+function decoder(input) {
+    let decodedInput = "";
+
+    const naturalDict = {
+        "A": ".—", "N": "—.", "0": "—————",
+        "B": "—...", "Ñ": "——.——", "1": ".————",
+        "C": "—.—.", "O": "———", "2": "..———",
+        "CH": "————", "P": ".——.", "3": "...——",
+        "D": "—..", "Q": "——.—", "4": "....—",
+        "E": ".", "R": ".—.", "5": ".....",
+        "F": "..—.", "S": "...", "6": "—....",
+        "G": "——.", "T": "—", "7": "——...",
+        "H": "....", "U": "..—", "8": "———..",
+        "I": "..", "V": "...—", "9": "————.",
+        "J": ".———", "W": ".——", ".": ".—.—.—",
+        "K": "—.—", "X": "—..—", ",": "——..——",
+        "L": ".—..", "Y": "—.——", "?": "..——..",
+        "M": "——", "Z": "——..", "\"": ".—..—.", "/": "—..—."
+    };
+
+    const morseDict = {};
+    Object.entries(naturalDict).forEach(([key, value]) => {
+        morseDict[value] = key;
+    });
+
+    if (/[a-zA-Z0-9]/.test(input)) {
+        // Texto natural a Morse
+        let index = 0;
+        let ch = false;
+
+        input.toUpperCase().split("").forEach((character) => {
+            if (!ch && character !== " ") {
+                const nextIndex = index + 1;
+                if (character === "C" && nextIndex < input.length && input.toUpperCase()[nextIndex] === "H") {
+                    decodedInput += naturalDict["CH"];
+                    ch = true;
+                } else {
+                    decodedInput += naturalDict[character] || "";
+                }
+
+                decodedInput += " ";
+            } else {
+                if (!ch) {
+                    decodedInput += " ";
+                }
+                ch = false;
+            }
+
+            index++;
+        });
+    } else if (input.includes(".") || input.includes("—")) {
+        // Morse a texto natural
+        input.split("  ").forEach((word) => {
+            word.split(" ").forEach((symbols) => {
+                if (symbols) {
+                    decodedInput += morseDict[symbols] || "";
+                }
+            });
+            decodedInput += " ";
+        });
+    }
+
+    return decodedInput.trim();
+}
+
+// Ejemplo de uso
+const naturalText = "Chocapic. Es una marca de cereales?";
+const morseText = decoder(naturalText);
+console.log("Texto a Morse:", morseText);
+console.log("Morse a Texto:", decoder(morseText));
