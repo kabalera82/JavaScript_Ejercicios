@@ -4,7 +4,6 @@ let coloresCambiados = false;
 function cambiaColor() {
     // Accedemos al elemento :root
     const root = document.documentElement;
-
     if (!coloresCambiados) {
         // Generamos colores aleatorios
         /*
