@@ -23,16 +23,20 @@ let rightPressed = false; // Variable para controlar si la tecla derecha esta pr
 let leftPressed = false; // Variable para controlar si la tecla izquierda esta presionada
 
 /*VARIABLES DE LOS LADRILLOS*/
-let brickRowCount = 3; // Cantidad de filas de ladrillos
-let brickColumnCount = 5; // Cantidad de columnas de ladrillos
+let brickRowCount = 4; // Cantidad de filas de ladrillos
+let brickColumnCount = 6; // Cantidad de columnas de ladrillos
 let brickWidth = 75; // Ancho de los ladrillos
 let brickHeight = 20; // Altura de los ladrillos
-let brickPadding = 10; // Espacio entre los ladrillos
+let brickPadding = 5; // Espacio entre los ladrillos
 let brickOffsetTop = 30; // Espacio desde la parte superior del canvas hasta la primera fila de ladrillos
-let brickOffsetLeft = 30; // Espacio desde la parte izquierda del canvas hasta la primera columna de ladrillos
+let brickOffsetLeft = 15; // Espacio desde la parte izquierda del canvas hasta la primera columna de ladrillos
 
 /*VARIABLE DE PUNTUACION*/
 let score = 0;
+/*VARIABLE DE NUMERO DE VIDAS*/
+let lives = 3; // Variable para controlar el numero de vidas del jugador
+
+/*VARIABLE DE LOS LADRILLOS*/
 //Guardamos los ladrillos en un array bidimensional
 let bricks = []; // Creamos un array vacio para guardar los ladrillos
 for (i = 0; i < brickColumnCount; i++) {
@@ -137,6 +141,13 @@ function drawScore() {
     ctx.fillText("Score: " + score, 8, 20); // Dibujamos el texto en el canvas
 }
 
+/* FUNCION PARA PINTAR EL NUMERO DE VIDAS*/
+function drawLives() {
+    ctx.font='16px Arial'; // Establecemos la fuente y el tamaño del texto
+    ctx.fillStyle='#0095DD'; // Establecemos el color del texto
+    ctx.fillText('Lives: '+lives, canvas.width-65, 20); // Dibujamos el texto en el canvas
+}
+
 /*FUNCION PARA DETECTAR COLISIONES CON LOS LADRILLOS*/
 function collisionDetection() {
     for (i = 0; i < brickColumnCount; i++) {
@@ -205,6 +216,7 @@ function draw() {
     drawBricks(); // Llamamos a la funcion que dibuja los ladrillos
     drawBall();// Llamamos a la funcion que dibuja la esfera
     drawScore(); // Llamamos a la funcion que dibuja la puntuacion
+    drawLives(); // Llamamos a la funcion que dibuja el numero de vidas
     drawPaddle();// Llamamos a la funcion que dibuja la paleta
     /*
     Evita que una pelota se salga del canvas, rebotando cuando llega a los bordes.
@@ -220,8 +232,18 @@ function draw() {
         if (x > paddleX && x < paddleX + paddleWidth) {
             dy = -dy;
         } else {
-            alert("GAME OVER");
-            gameOver = true; // Cambiamos el estado de la variable gameOver a verdadero
+            lives--;
+            if (!lives) {
+                alert("GAME OVER");
+                document.location.reload();
+                clearInterval(interval); // Needed for Chrome to end game
+              } else {
+                x = canvas.width / 2;
+                y = canvas.height - 30;
+                dx = 2;
+                dy = -2;
+                paddleX = (canvas.width - paddleWidth) / 2;
+              }
         }
     }
     if (rightPressed && paddleX < canvas.width - paddleWidth) {
@@ -235,7 +257,7 @@ function draw() {
 }
 
 //Llamamos a la funcion draw cada 10 milisegundos
-setInterval(draw, 10);
+interval = setInterval(draw, 10);
 
 
 
