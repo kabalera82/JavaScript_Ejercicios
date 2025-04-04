@@ -18,6 +18,8 @@ function setCapitalUpper(str) {
     const firstUp = str.charAt(0).toUpperCase();
     //Por ultimo metodo slice para obtener el resto desde la posicion 1 hasta el final
     const Upper = str.slice(1).toLowerCase();
+    //si no se recibe nada devolvemos un string vacio devolvemos cadena vacia
+    if (!str) return "";
     //Devolvemos la dos constantes juntas.
     return (firstUp + Upper)
 }
