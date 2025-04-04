@@ -1,0 +1,12 @@
+*{
+    padding:o;
+    margin:o;
+    box-sizing:border-box;
+}
+
+
+canvas {
+    background-color: #dbd7c7;
+    display: block;
+    margin: 0 auto;
+}
