@@ -4,32 +4,35 @@ console.log("Hello World");
  * Definimos las variables que vamos a usar para la animacion
 */
 /* VARIABLES DE LA ESFERA*/
-var canvas = document.getElementById("myCanvas"); //Capturamos el canvas por su id
-var ctx = canvas.getContext("2d"); // Capturamos el canvas y el contexto por el que vamos a dibujar
-var ballRadius = 10; // Definimos la variable del radio de la esfera
-var x = canvas.width / 2; //Posicion inicial de la esfera en el eje X
-var y = canvas.height - 30;//Posicion inicial de la esfera en el eje Y
-var dx = 2; // velocidad de la esfera en el eje X
-var dy = -2; // velocidad de la esfera en el eje Y
+let canvas = document.getElementById("myCanvas"); //Capturamos el canvas por su id
+let ctx = canvas.getContext("2d"); // Capturamos el canvas y el contexto por el que vamos a dibujar
+let ballRadius = 10; // Definimos la variable del radio de la esfera
+let x = canvas.width / 2; //Posicion inicial de la esfera en el eje X
+let y = canvas.height - 30;//Posicion inicial de la esfera en el eje Y
+let dx = 2; // velocidad de la esfera en el eje X
+let dy = -2; // velocidad de la esfera en el eje Y
+
 
 /*VARIABLES DE LA ESFERA*/
-var paddleHeight = 10; // Altura de la paleta
-var paddleWidth = 75; // Ancho de la paleta
-var paddleX = (canvas.width - paddleWidth) / 2; // Posicion de la paleta en el eje X
+let paddleHeight = 10; // Altura de la paleta
+let paddleWidth = 75; // Ancho de la paleta
+let paddleX = (canvas.width - paddleWidth) / 2; // Posicion de la paleta en el eje X
 
 /*variables de control de la paleta*/
-var rightPressed = false; // Variable para controlar si la tecla derecha esta presionada
-var leftPressed = false; // Variable para controlar si la tecla izquierda esta presionada
+let rightPressed = false; // Variable para controlar si la tecla derecha esta presionada
+let leftPressed = false; // Variable para controlar si la tecla izquierda esta presionada
 
 /*VARIABLES DE LOS LADRILLOS*/
-var brickRowCount = 3; // Cantidad de filas de ladrillos
-var brickColumnCount = 5; // Cantidad de columnas de ladrillos
-var brickWidth = 75; // Ancho de los ladrillos
-var brickHeight = 20; // Altura de los ladrillos
-var brickPadding = 10; // Espacio entre los ladrillos
-var brickOffsetTop = 30; // Espacio desde la parte superior del canvas hasta la primera fila de ladrillos
-var brickOffsetLeft = 30; // Espacio desde la parte izquierda del canvas hasta la primera columna de ladrillos
+let brickRowCount = 3; // Cantidad de filas de ladrillos
+let brickColumnCount = 5; // Cantidad de columnas de ladrillos
+let brickWidth = 75; // Ancho de los ladrillos
+let brickHeight = 20; // Altura de los ladrillos
+let brickPadding = 10; // Espacio entre los ladrillos
+let brickOffsetTop = 30; // Espacio desde la parte superior del canvas hasta la primera fila de ladrillos
+let brickOffsetLeft = 30; // Espacio desde la parte izquierda del canvas hasta la primera columna de ladrillos
 
+/*VARIABLE DE PUNTUACION*/
+let score = 0;
 //Guardamos los ladrillos en un array bidimensional
 let bricks = []; // Creamos un array vacio para guardar los ladrillos
 for (i = 0; i < brickColumnCount; i++) {
@@ -42,6 +45,9 @@ for (i = 0; i < brickColumnCount; i++) {
 
 /*VARIABLE DE CONTROL DE JUIEGO*/
 let gameOver = false; // Variable para controlar si el juego ha terminado
+
+/*EVENTOS DE CONTROL DE RATON*/
+document.addEventListener("mousemove", mouseMoveHandler, false); // Evento para detectar el movimiento del raton
 
 /*EVENTOS DE TECLADO*/
 document.addEventListener("keydown", keyDownHandler, false); // Evento para detectar cuando se presiona una tecla
@@ -79,9 +85,9 @@ function drawBall() { // Creamos la funcion drawBall para dibujar la esfera
     ctx.beginPath(); // Iniciamos un nuevo camino para dibujar
     // Esto lo convertimos en ctx.arc(x,y,10,0, Math.PI*2);
     ctx.arc(x, y, ballRadius, 0, Math.PI * 2); // añado,ps el radio para calcular el tamaño de la esfera
-    ctx.fillStyle = "rgba(162, 226, 174, 0.5)"; //establecemos el color del relleno
+    ctx.fillStyle = "rgb(255, 0, 0)"; //establecemos el color del relleno
     ctx.fill(); // cerramos el relleno de la esfera
-    ctx.strokeStyle = "rgb(243, 237, 237)"; //establecemos el color del borde
+    ctx.strokeStyle = "rgb(0, 0, 0)"; //establecemos el color del borde
     ctx.stroke(); // cerramos el color del borde de la esfera
     ctx.closePath(); // cerramos el dibujo actual
 }
@@ -124,20 +130,37 @@ function drawBricks() {
     }
 }
 
+/*FUNCION DE PUNTUACIóN*/
+function drawScore() {
+    ctx.font = "16px Arial"; // Establecemos la fuente y el tamaño del texto
+    ctx.fillStyle = "#0095DD"; // Establecemos el color del texto
+    ctx.fillText("Score: " + score, 8, 20); // Dibujamos el texto en el canvas
+}
+
 /*FUNCION PARA DETECTAR COLISIONES CON LOS LADRILLOS*/
 function collisionDetection() {
     for (i = 0; i < brickColumnCount; i++) {
         for (j = 0; j < brickRowCount; j++) {
-            let b = bricks[i][j]; // Guardamos el ladrillo en una variable
+            const b = bricks[i][j]; // Guardamos el ladrillo en una variable
 
             // DETECTAMOS LA COLISION CON LOS LADRILLOS CUANDO EL CENTRO DE LA ESFERA ESTA DENTRO DEL LADRILLO
             // es decir cuando  posicion "X" de la bola es mayor  que la "X" del ladrillo y menos que la "X" del ancho del ladrillo.
             // y cuando la posición "Y" de la bola es mayor que la "Y" del ladrillo y menos que la "Y" del alto del ladrillo.
 
-            if (b.status == 1) {
-                if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+            if (b.status === 1) {
+                if (x > b.x &&
+                    x < b.x + brickWidth && 
+                    y > b.y && 
+                    y < b.y + brickHeight
+                ) {
                     dy = -dy; // Cambiamos la direccion de la esfera al rebotar con el ladrillo
                     b.status = 0; // Cambiamos el estado del ladrillo a 0 para que no se dibuje mas)
+                    score++; // Aumentamos la puntuacion en 1
+                    if (score === brickRowCount * brickColumnCount) { // Si la puntuacion es igual al total de ladrillos
+                        alert("YOU WIN, CONGRATULATIONS!"); // Mensaje de victoria
+                        document.location.reload(); // Recargamos la pagina para reiniciar el juego
+                        clearInterval(interval); // Limpiamos el intervalo
+                    }
                 }
             }
 
@@ -164,6 +187,14 @@ function keyUpHandler(e) {
     }
 }
 
+/*FUNCION PARA MOVER LA PALETA CON EL RATON*/
+function mouseMoveHandler(e){
+    const relativeX = e.clientX - canvas.offsetLeft; // Obtenemos la posicion del raton en el eje X
+    if(relativeX > 0 && relativeX < canvas.width){ // Si la posicion del raton es mayor que 0 y menor que el ancho del canvas
+        paddleX = relativeX - paddleWidth/2; // Asignamos la posicion de la paleta al raton menos la mitad del ancho de la paleta
+    }
+}
+
 
 /* ANIMAMOS LA ESFERA*/
 function draw() {
@@ -173,6 +204,7 @@ function draw() {
     collisionDetection()
     drawBricks(); // Llamamos a la funcion que dibuja los ladrillos
     drawBall();// Llamamos a la funcion que dibuja la esfera
+    drawScore(); // Llamamos a la funcion que dibuja la puntuacion
     drawPaddle();// Llamamos a la funcion que dibuja la paleta
     /*
     Evita que una pelota se salga del canvas, rebotando cuando llega a los bordes.
