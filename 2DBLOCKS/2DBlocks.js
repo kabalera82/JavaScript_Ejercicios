@@ -9,8 +9,8 @@ let ctx = canvas.getContext("2d"); // Capturamos el canvas y el contexto por el 
 let ballRadius = 10; // Definimos la variable del radio de la esfera
 let x = canvas.width / 2; //Posicion inicial de la esfera en el eje X
 let y = canvas.height - 30;//Posicion inicial de la esfera en el eje Y
-let dx = 2; // velocidad de la esfera en el eje X
-let dy = -2; // velocidad de la esfera en el eje Y
+let dx = 5; // velocidad Inicial de la esfera en el eje X
+let dy = -5; // velocidad Inicial de la esfera en el eje Y
 
 
 /*VARIABLES DE LA ESFERA*/
@@ -32,7 +32,8 @@ let brickOffsetTop = 30; // Espacio desde la parte superior del canvas hasta la 
 let brickOffsetLeft = 15; // Espacio desde la parte izquierda del canvas hasta la primera columna de ladrillos
 
 /*VARIABLE DE PUNTUACION*/
-let score = 0;
+let level = 1; // Variable para controlar el nivel del juego
+let score = 0;// Variable para controlar la puntuacion del jugador
 /*VARIABLE DE NUMERO DE VIDAS*/
 let lives = 3; // Variable para controlar el numero de vidas del jugador
 
@@ -149,6 +150,10 @@ function drawLives() {
 }
 
 /*FUNCION PARA DETECTAR COLISIONES CON LOS LADRILLOS*/
+/*
+    La función collisionDetection() recorre todos los ladrillos y verifica si la bola colisiona con alguno de ellos.
+    Si hay una colisión, cambia la dirección de la bola y actualiza el estado del ladrillo.
+*/
 function collisionDetection() {
     for (i = 0; i < brickColumnCount; i++) {
         for (j = 0; j < brickRowCount; j++) {
@@ -158,23 +163,31 @@ function collisionDetection() {
             // es decir cuando  posicion "X" de la bola es mayor  que la "X" del ladrillo y menos que la "X" del ancho del ladrillo.
             // y cuando la posición "Y" de la bola es mayor que la "Y" del ladrillo y menos que la "Y" del alto del ladrillo.
 
-            if (b.status === 1) {
-                if (x > b.x &&
-                    x < b.x + brickWidth && 
-                    y > b.y && 
-                    y < b.y + brickHeight
-                ) {
-                    dy = -dy; // Cambiamos la direccion de la esfera al rebotar con el ladrillo
-                    b.status = 0; // Cambiamos el estado del ladrillo a 0 para que no se dibuje mas)
-                    score++; // Aumentamos la puntuacion en 1
-                    if (score === brickRowCount * brickColumnCount) { // Si la puntuacion es igual al total de ladrillos
-                        alert("YOU WIN, CONGRATULATIONS!"); // Mensaje de victoria
-                        document.location.reload(); // Recargamos la pagina para reiniciar el juego
-                        clearInterval(interval); // Limpiamos el intervalo
+            if (b.status === 1) { // Solo verifica colisiones con ladrillos activos
+                if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
+                    dy = -dy; // Cambia la dirección de la esfera al rebotar con el ladrillo
+                    b.status = 0; // Cambia el estado del ladrillo a 0 para que no se dibuje más
+                    score++; // Incrementa la puntuación
+
+                    if (score % (brickRowCount * brickColumnCount) === 0) { // Si se eliminan todos los ladrillos del nivel actual
+                        level++; // Incrementa el nivel
+                        dx *= 1.2; // Incrementa la velocidad en el eje X
+                        dy *= 1.2; // Incrementa la velocidad en el eje Y
+                        resetBricks(); // Reinicia los ladrillos
+                        drawMessage(`LEVEL ${level}!`); // Muestra el mensaje del nuevo nivel
+                        setTimeout(() => draw(), 2000); // Pausa de 2 segundos antes de continuar
                     }
                 }
             }
-
+        }
+    }
+}
+/*CREAMOS LA FUNCION PARA REINICIAR LOS LADRILLOS*/
+function resetBricks() {
+    for(let i=0;i <brickColumnCount;i++){ // Recorremos las columnas de ladrillos un eje X
+        for(let j = 0; j < brickRowCount; j++){ // Recorremos los ladrillos // eje Y
+            const randomColor = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`; //color aleatorio
+            bricks[i][j] = { x: 0, y: 0, color: randomColor, status: 1}; // Reiniciamos el estado del ladrillo con un color aleatorio
         }
     }
 }
@@ -218,6 +231,7 @@ function draw() {
     drawScore(); // Llamamos a la funcion que dibuja la puntuacion
     drawLives(); // Llamamos a la funcion que dibuja el numero de vidas
     drawPaddle();// Llamamos a la funcion que dibuja la paleta
+    drawLevel(); // Llamamos a la funcion que dibuja el nivel
     /*
     Evita que una pelota se salga del canvas, rebotando cuando llega a los bordes.
     x, y: la posición actual de la pelota en el canvas (en los ejes horizontal y vertical).
@@ -234,14 +248,13 @@ function draw() {
         } else {
             lives--;
             if (!lives) {
-                alert("GAME OVER");
                 document.location.reload();
-                clearInterval(interval); // Needed for Chrome to end game
               } else {
                 x = canvas.width / 2;
                 y = canvas.height - 30;
-                dx = 2;
-                dy = -2;
+                let speed = Math.sqrt(dx * dx + dy * dy); // Calcula la velocidad actual
+                dx = (dx > 0 ? 1 : -1) * speed; // Mantén la dirección en X
+                dy = (dy > 0 ? 1 : -1) * speed; // Mantén la dirección en Y
                 paddleX = (canvas.width - paddleWidth) / 2;
               }
         }
@@ -254,6 +267,19 @@ function draw() {
     }
     x += dx;
     y += dy;
+}
+/*Funcion para dibujar el nivel*/
+function drawLevel() {
+    ctx.font = "16px Arial"; // Establecemos la fuente y el tamaño del texto
+    ctx.fillStyle = "#0095DD"; // Establecemos el color del texto
+    ctx.fillText("Level: " + level, canvas.width / 2 - 30, 20); // Dibujamos el texto en el canvas
+}
+/*funcion para lanzar mensajes en el canvas*/
+function drawMessage(message) {
+    ctx.font = "24px Arial"; // Establecemos la fuente y el tamaño del texto
+    ctx.fillStyle = "#FF0000"; // Establecemos el color del texto
+    ctx.textAlign = "center"; // Centramos el texto
+    ctx.fillText(message, canvas.width / 2, canvas.height / 2); // Dibujamos el texto en el centro del canvas
 }
 
 //Llamamos a la funcion draw cada 10 milisegundos
