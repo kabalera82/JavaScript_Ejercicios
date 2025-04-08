@@ -9,8 +9,8 @@ let ctx = canvas.getContext("2d"); // Capturamos el canvas y el contexto por el 
 let ballRadius = 10; // Definimos la variable del radio de la esfera
 let x = canvas.width / 2; // Posicion inicial de la esfera en el eje X
 let y = canvas.height - 30; // Posicion inicial de la esfera en el eje Y
-let dx = 5; // Velocidad inicial de la esfera en el eje X
-let dy = -5; // Velocidad inicial de la esfera en el eje Y
+let dx = 2; // Velocidad inicial de la esfera en el eje X
+let dy = -2; // Velocidad inicial de la esfera en el eje Y
 
 /* VARIABLES DE LA PALETA */
 let paddleHeight = 10; // Altura de la paleta
