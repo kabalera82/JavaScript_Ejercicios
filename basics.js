@@ -64,3 +64,43 @@ console.log(list[0]); // 23
 function hola() {
     return "Hola";
 }
+
+/*
+ * Crea un programa que realice las siguientes operaciones con un array:
+ *
+ * 1. Añadir un elemento al final del array.
+ * 2. Añadir un elemento al principio del array.
+ * 3. Eliminar el último elemento del array.
+ * 4. Eliminar el primer elemento del array.
+ * 5. Eliminar un elemento en una posición específica del array.
+ * 6.Invierte el orden de los elementos del array.
+ * 7. Ordena el array en orden ascendente.
+ * 8. Crea un nuevo array llamado pares que contenga solo los números pares del array original utilizando un método.
+ * 9. Calcula la suma de todos los elementos del array utilizando un método adecuado.
+ * 10. Muestra por consola el array original, el array de números pares y la suma total.
+ */
+const operacionesArray = [Alpha, Beta, Gamma, Delta, Epsilon, Zeta, Eta, Theta, Iota, Kappa];
+// Añadir un elemento al final del array 
+operacionesArray.push("Lambda");
+// Añadir un elemento al principio del array
+operacionesArray.unshift("Alpha");
+// Eliminar el último elemento del array
+operacionesArray.pop();
+// Eliminar el primer elemento del array
+operacionesArray.shift();
+// Eliminar un elemento en una posición específica del array
+operacionesArray.splice(2, 1); // Elimina el elemento en la posición 2
+// Invertir el orden de los elementos del array
+operacionesArray.reverse();
+// Ordenar el array en orden ascendente
+for( i=0;i<operacionesArray.length;i++){
+    for(j=i+1;j<operacionesArray.length;j++){
+        if(operacionesArray[i]>operacionesArray[j]){
+            let temp=operacionesArray[i];
+            operacionesArray[i]=operacionesArray[j];
+            operacionesArray[j]=temp;
+        }
+    }
+}{
+
+}
