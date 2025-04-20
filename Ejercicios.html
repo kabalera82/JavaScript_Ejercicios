@@ -274,14 +274,56 @@
         <p>Crea un programa que sea capaz de transformar texto natural a código morse y viceversa</p>
         <pre>
             <code>
+                function morse(str) {
+                    // Definimos el alfabeto Morse
+                    const morseAlphabet = {
+                        "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".",
+                        "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
+                        "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
+                        "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+                        "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
+                        "Z": "--..", 0: "-----", 1: ".----", 2: "..---", 3: "...--",
+                        4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..",
+                        9: "----."
+                    };
+                    // Convertimos la cadena a mayúsculas y la dividimos en caracteres lo que nos permite usar el map
+                    // y luego unimos los caracteres en una cadena separada por espacios
+                    // Si el carácter no está en el alfabeto Morse, lo devolvemos como un espacio
+                    // y si está lo devolvemos como el valor correspondiente en el alfabeto Morse
+                    // y lo unimos en una cadena separada por espacios
+                    const morseCode = str.toUpperCase().split("").map(char => {
+                        if (char === " ") return " "; // Handle spaces explicitly
+                        return morseAlphabet[char] || ""; // Return Morse code or empty string for unknown characters
+                    }).join(" ");
+                  
+                    // Si el carácter está en el alfabeto Morse, lo devolvemos, sino devolvemos un espacio
+                   // Unimos los caracteres en una cadena separada por espacios
                 
+                    return morseCode; // Devolvemos el código Morse resultante
+                }  
             </code>
         </pre>
     </fieldset>
     <fieldset>
-        <h2>Ejercicio</h2>
-        <p></p>
-        <p></p>
+        <h2>Comprobación de Expresiones Balanceadas</h2>
+        <p>
+            Crea un programa que comprueba si los paréntesis, llaves y corchetes
+            de una expresión están equilibrados.
+        </p>
+        <p>
+            - Equilibrado significa que estos delimitadores se abren y cierran
+            en orden y de forma correcta.
+        </p>
+        <p>
+            - Paréntesis, llaves y corchetes son igual de prioritarios.
+            No hay uno más importante que otro.
+        </p>
+        <p>
+            - Ejemplo de expresión balanceada: { [ a * ( c + d ) ] - 5 }
+        </p>
+        <p>
+            - Ejemplo de expresión no balanceada: { a * ( c + d ) ] - 5 }
+        </p>
         <pre>
             <code>
                 

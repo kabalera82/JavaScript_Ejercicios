@@ -228,7 +228,6 @@ function Fibonacci(num) {
 }
 
 // Ejemplo de uso
-Fibonacci(20); // Genera los primeros 10 números de la secuencia de Fibonacci
 function Fibonacci(num) {
     let n0 = 0; // Primer número de la sucesión
     let n1 = 1; // Segundo número de la sucesión
@@ -246,4 +245,34 @@ function Fibonacci(num) {
 // Ejemplo de uso
 Fibonacci(20); // Imprime los primeros 50 números de la sucesión de Fibonacci
 
-/**/
+/*Codigo Morse*/
+function morse(str) {
+    // Definimos el alfabeto Morse
+    const morseAlphabet = {
+        "A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".",
+        "F": "..-.", "G": "--.", "H": "....", "I": "..", "J": ".---",
+        "K": "-.-", "L": ".-..", "M": "--", "N": "-.", "O": "---",
+        "P": ".--.", "Q": "--.-", "R": ".-.", "S": "...", "T": "-",
+        "U": "..-", "V": "...-", "W": ".--", "X": "-..-", "Y": "-.--",
+        "Z": "--..", 0: "-----", 1: ".----", 2: "..---", 3: "...--",
+        4: "....-", 5: ".....", 6: "-....", 7: "--...", 8: "---..",
+        9: "----."
+    };
+
+    // Convertimos la cadena a mayúsculas y la dividimos en caracteres lo que nos permite usar el map
+    // y luego unimos los caracteres en una cadena separada por espacios
+    // Si el carácter no está en el alfabeto Morse, lo devolvemos como un espacio
+    // y si está lo devolvemos como el valor correspondiente en el alfabeto Morse
+    // y lo unimos en una cadena separada por espacios
+    const morseCode = str.toUpperCase().split("").map(char => {
+        if (char === " ") return " "; // Handle spaces explicitly
+        return morseAlphabet[char] || ""; // Return Morse code or empty string for unknown characters
+    }).join(" ");
+  
+    // Si el carácter está en el alfabeto Morse, lo devolvemos, sino devolvemos un espacio
+   // Unimos los caracteres en una cadena separada por espacios
+
+    return morseCode; // Devolvemos el código Morse resultante
+}  
+    morse("Hola Mundo desde Javascript"); 
+    console.log(morse("Hola Mundo desde Javascript")); // Imprime el código Morse correspondiente a la cadena
